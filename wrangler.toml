@@ -1,0 +1,8 @@
+name = "ortho-tests"
+pages_build_output_dir = "dist"
+compatibility_date = "2024-04-01"
+
+[[d1_databases]]
+binding = "ORTHO_TESTS_DB"
+database_name = "ortho-tests-db"
+database_id = "494a8d83-9a3a-480f-bcaa-9aec3a1792b9"

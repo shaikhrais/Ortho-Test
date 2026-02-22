@@ -1,0 +1,85 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --primary: #3b82f6;
+    --secondary: #10b981;
+    --background: #0b0f18;
+    --border: rgba(255, 255, 255, 0.1);
+    --text-main: #ffffff;
+    --text-dim: rgba(255, 255, 255, 0.6);
+}
+
+@layer base {
+    body {
+        @apply bg-background text-text-main font-inter antialiased;
+    }
+
+    a {
+        @apply text-white no-underline transition-colors;
+    }
+
+    button {
+        @apply cursor-pointer outline-none;
+    }
+}
+
+@layer components {
+    .glass {
+        @apply bg-white/5 backdrop-blur-md border border-white/10;
+    }
+
+    .glass-premium {
+        @apply bg-white/10 backdrop-blur-xl border border-white/20 shadow-glass-premium;
+    }
+
+    .text-glow {
+        text-shadow: 0 0 10px rgba(59, 130, 246, 0.5), 0 0 20px rgba(59, 130, 246, 0.3);
+    }
+
+    .text-glow-white {
+        text-shadow: 0 0 10px rgba(255, 255, 255, 0.4), 0 0 20px rgba(255, 255, 255, 0.2);
+    }
+
+    .clinical-btn {
+        @apply transition-all duration-300 active:scale-95 disabled:opacity-50 disabled:pointer-events-none;
+    }
+
+    .badge-small {
+        @apply inline-flex items-center rounded-full border border-white/10 bg-white/5 px-2.5 py-0.5 text-[10px] font-bold tracking-widest text-white/70 uppercase;
+    }
+
+    .glow-line {
+        @apply pointer-events-none absolute inset-x-0 -top-px h-px bg-gradient-to-r from-transparent via-white/20 to-transparent;
+    }
+
+    .bg-modal-gradient {
+        background: linear-gradient(180deg, #141a26 0%, #0f1420 100%);
+    }
+
+    .styled-scrollbar::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    .styled-scrollbar::-webkit-scrollbar-track {
+        @apply bg-transparent;
+    }
+
+    .styled-scrollbar::-webkit-scrollbar-thumb {
+        @apply bg-primary/20 rounded-full hover:bg-primary/40 transition-colors;
+    }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    @apply bg-transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    @apply bg-white/10 rounded-full hover:bg-white/20;
+}

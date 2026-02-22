@@ -1,0 +1,5 @@
+INSERT INTO joints_structure (id, joint_id, joint_name, structure_id, structure_name, category_name, relationship, injury_frequency, notes, created_at, test_in_1, test_in_2, test_out_1, nerve_test_1, nerve_test_2, nerve_test_3) VALUES
+(26,7,'PIRIFORMIS',1601,'Piriformis muscle','Muscle','PRIMARY_MOVER','COMMON',NULL,'2026-02-20 05:10:36', 'FAIR Test','Pace Sign','FADIR', 'Straight Leg Raise (SLR)','Slump Test','Dermatome S1'),
+(27,7,'PIRIFORMIS',1408,'Sciatic nerve','Nerve','NEURO','COMMON','Piriformis syndrome','2026-02-20 05:10:36', 'FAIR Test','Pace Sign','FADIR', 'Straight Leg Raise (SLR)','Slump Test','Dermatome S1'),
+(303,7,'PIRIFORMIS',1605,'Obturator internus','Muscle','ASSOCIATED','UNCOMMON','Deep rotator synergy','2026-02-20 05:10:36', 'FAIR Test','Pace Sign','FADIR', 'Straight Leg Raise (SLR)','Slump Test','Dermatome S1'),
+(304,7,'PIRIFORMIS',1606,'Quadratus femoris','Muscle','ASSOCIATED','UNCOMMON','Deep rotator synergy','2026-02-20 05:10:36', 'FAIR Test','Pace Sign','FADIR', 'Straight Leg Raise (SLR)','Slump Test','Dermatome S1');
