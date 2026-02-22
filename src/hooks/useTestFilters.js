@@ -4,6 +4,8 @@ export const useTestFilters = (tests) => {
     const [searchQuery, setSearchQuery] = useState('');
     const [activeTab, setActiveTab] = useState('ALL');
     const [activeStatus, setActiveStatus] = useState('ALL');
+    const [difficulty, setDifficulty] = useState('ALL');
+    const [isTrending, setIsTrending] = useState(false);
 
     const filteredTests = useMemo(() => {
         return tests.filter(test => {
@@ -16,9 +18,12 @@ export const useTestFilters = (tests) => {
                 (activeStatus === 'DONE' && isDone) ||
                 (activeStatus === 'PENDING' && !isDone);
 
-            return matchesSearch && matchesTab && matchesStatus;
+            const matchesDifficulty = difficulty === 'ALL' || test.difficulty === difficulty;
+            const matchesTrending = !isTrending || test.isTrending;
+
+            return matchesSearch && matchesTab && matchesStatus && matchesDifficulty && matchesTrending;
         });
-    }, [tests, searchQuery, activeTab, activeStatus]);
+    }, [tests, searchQuery, activeTab, activeStatus, difficulty, isTrending]);
 
     const doneCount = useMemo(() => tests.filter(t => !!t.youtubeUrl).length, [tests]);
     const pendingCount = useMemo(() => tests.length - doneCount, [tests, doneCount]);
@@ -27,6 +32,8 @@ export const useTestFilters = (tests) => {
         searchQuery, setSearchQuery,
         activeTab, setActiveTab,
         activeStatus, setActiveStatus,
+        difficulty, setDifficulty,
+        isTrending, setIsTrending,
         filteredTests,
         doneCount, pendingCount
     };

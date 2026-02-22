@@ -3,13 +3,13 @@ import FlowStep from './Shared/FlowStep';
 
 const WorkflowSection = ({ uniqueTests }) => {
     return (
-        <section className="bg-[#101a33] rounded-[2rem] border border-white/10 shadow-2xl overflow-hidden p-8">
-            <div className="flex items-center justify-between mb-8">
-                <h3 className="text-sm font-black uppercase tracking-widest">Identification Flow</h3>
-                <span className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[9px] font-black uppercase tracking-widest text-[#97a3e6]">Standardized</span>
+        <section className="workflow-block">
+            <div className="workflow-title-box">
+                <h3 className="workflow-label-text">Identification Flow</h3>
+                <span className="summary-test-count">Standardized</span>
             </div>
 
-            <div className="space-y-4">
+            <div className="workflow-steps-vertical">
                 <FlowStep number="1" title="Subjective History" desc="Mechanism, 24-hour pattern, irritability." />
                 <FlowStep number="2" title="AROM → PROM" desc="Compare to separate contractile vs non-contractile." />
                 <FlowStep number="3" title="Resisted Tests (MMT)" desc="Strong-painful vs weak-painful differentiation." />

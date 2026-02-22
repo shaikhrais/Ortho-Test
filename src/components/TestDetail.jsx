@@ -10,36 +10,35 @@ const TestDetail = ({ test, onClose, onEdit }) => {
 
     return (
         <AnimatePresence>
-            <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+            <div className="modal-backdrop-fixed">
                 {/* Backdrop */}
                 <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     onClick={onClose}
-                    className="absolute inset-0 bg-black/70 backdrop-blur-sm"
+                    className="modal-backdrop-overlay"
                 />
 
-                {/* Modal */}
+                {/* Modal Container */}
                 <motion.div
                     initial={{ opacity: 0, scale: 0.95, y: 20 }}
                     animate={{ opacity: 1, scale: 1, y: 0 }}
                     exit={{ opacity: 0, scale: 0.95, y: 20 }}
-                    className="relative w-[min(1200px,94vw)] max-h-[90vh] overflow-hidden rounded-3xl border border-white/10 bg-modal-gradient shadow-2xl"
+                    className="modal-container-large"
                 >
-                    {/* Top Glow Line */}
-                    <div className="glow-line" />
+                    <div className="modal-glow-strip" />
 
                     <TestDetailHeader
                         test={test}
                         onClose={onClose}
                     />
 
-                    {/* Body: Scrollable Area */}
-                    <div className="max-h-[calc(90vh-160px)] overflow-auto styled-scrollbar">
-                        <div className="p-6 grid grid-cols-1 lg:grid-cols-12 gap-8">
-                            {/* LEFT: Video + Quick Summary */}
-                            <aside className="lg:col-span-5 space-y-6">
+                    {/* Scrollable Body */}
+                    <div className="modal-scrollable-body no-scrollbar">
+                        <div className="modal-grid-layout">
+                            {/* LEFT COLUMN */}
+                            <aside className="modal-sidebar-left">
                                 <TestDetailMedia
                                     test={test}
                                     onEdit={onEdit}
@@ -49,10 +48,12 @@ const TestDetail = ({ test, onClose, onEdit }) => {
                                 />
                             </aside>
 
-                            {/* RIGHT: Detailed Content Sections */}
-                            <TestDetailContent
-                                test={test}
-                            />
+                            {/* RIGHT COLUMN */}
+                            <main className="modal-main-content">
+                                <TestDetailContent
+                                    test={test}
+                                />
+                            </main>
                         </div>
                     </div>
 

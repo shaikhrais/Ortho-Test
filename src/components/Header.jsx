@@ -1,39 +1,51 @@
-import { Stethoscope, Activity } from 'lucide-react';
-
-const Header = ({ testsCount, dbVersion, onOpenDashboard }) => {
+const Header = ({ searchQuery, setSearchQuery, user }) => {
     return (
-        <header className="mb-12 space-y-8" data-ui-version="2.0">
-            <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8">
-                <div className="space-y-4">
-                    <div className="flex items-center gap-4">
-                        <div className="w-14 h-14 rounded-2xl bg-primary/20 flex items-center justify-center border border-primary/30 shadow-[0_0_30px_rgba(59,130,246,0.3)] group transition-all duration-300 hover:scale-110">
-                            <Stethoscope className="text-primary w-8 h-8 drop-shadow-glow" strokeWidth={2.5} />
-                        </div>
-                        <div>
-                            <h1 className="text-5xl font-black tracking-tighter text-white uppercase italic leading-none text-glow-white">
-                                Ortho<span className="text-primary not-italic">-</span>Tests
-                            </h1>
-                            <p className="mt-1 text-[10px] text-primary font-bold uppercase tracking-[0.4em]">
-                                Clinical Diagnostic Intelligence
-                            </p>
-                        </div>
+        <header className="global-header">
+            <div className="header-logo-section">
+                <div className="header-app-logo">
+                    <div className="logo-icon-container">
+                        <span className="material-symbols-outlined">orthopedics</span>
                     </div>
+                    <h1 className="logo-text">OrthoTests</h1>
                 </div>
+                <nav className="header-nav">
+                    <a className="nav-link nav-link-active" href="#">Tests</a>
+                    <a className="nav-link" href="#">Categories</a>
+                    <a className="nav-link" href="#">Library</a>
+                    <a className="nav-link" href="#">About</a>
+                </nav>
+            </div>
 
-                <div className="flex items-center gap-6">
-                    <button
-                        onClick={onOpenDashboard}
-                        className="group relative flex items-center gap-3 px-6 py-3.5 bg-gradient-to-r from-primary to-secondary rounded-2xl font-black text-[10px] uppercase tracking-[0.2em] text-white shadow-2xl shadow-primary/20 transition-all hover:scale-105 active:scale-95 overflow-hidden"
-                    >
-                        <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
-                        <Activity className="relative z-10 w-4 h-4" />
-                        <span className="relative z-10">Joint Assessment</span>
-                    </button>
+            <div className="header-search-container">
+                <div className="search-box">
+                    <span className="material-symbols-outlined search-icon">search</span>
+                    <input
+                        className="search-input"
+                        placeholder="Search tests, symptoms, or regions (Cmd + K)"
+                        type="text"
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                    />
+                </div>
+            </div>
 
-                    <div className="hidden lg:block text-right">
-                        <p className="text-text-dim text-[10px] font-medium max-w-[150px] ml-auto uppercase tracking-wider leading-relaxed">
-                            Standardizing protocols for clinical excellence.
-                        </p>
+            <div className="header-actions">
+                <button className="notification-btn">
+                    <span className="material-symbols-outlined">notifications</span>
+                    <span className="notification-badge"></span>
+                </button>
+                <div className="header-divider"></div>
+                <div className="user-profile-section">
+                    <div className="user-info">
+                        <p className="user-name">{user?.name || 'Dr. Smith'}</p>
+                        <p className="user-role">{user?.role || 'Senior Resident'}</p>
+                    </div>
+                    <div className="user-avatar">
+                        <img
+                            className="avatar-img"
+                            alt="Professional profile"
+                            src={user?.image || "https://lh3.googleusercontent.com/aida-public/AB6AXuASALPAElCptB9b0yh0VZSqPS4q9y-F_jiab-r32q3ClvVfw9_HqSKd6gZ153nAMzUxdSswg4MtjCozqdeOjOICMikv9AX5lScOP2SXn_HNw6wLGj9M2HJDbet_N5DvO0HM0xAmmjkoGF5CanIubsVumpElgvG3LlhiSZO1RUats41KQ-7Wu0Px-CuLNv6NnWKp3sPvfeJERiFwTotsOjFLHNbeORn7auGQ42kmM7juHzs6UjbrwDzxrwFAOykQNMkI0dRthP9g-g"}
+                        />
                     </div>
                 </div>
             </div>

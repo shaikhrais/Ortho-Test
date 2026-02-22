@@ -1,72 +1,58 @@
-import { useDataManagement } from '../hooks/useDataManagement';
-import SearchSection from './FilterBar/SearchSection';
-import StatusSection from './FilterBar/StatusSection';
-import DataConsole from './FilterBar/DataConsole';
-import SizeSelector from './FilterBar/SizeSelector';
-import RegionSection from './FilterBar/RegionSection';
-
 const FilterBar = ({
     categories = [],
-    activeTab,
-    setActiveTab,
-    searchQuery,
-    setSearchQuery,
-    activeStatus,
-    setActiveStatus,
-    doneCount,
-    pendingCount,
-    tests,
-    onImport,
-    cardSize,
-    setCardSize,
-    onViewLogs
+    activeTab, setActiveTab,
+    difficulty, setDifficulty,
+    isTrending, setIsTrending
 }) => {
-    const {
-        fileInputRef,
-        handleExport,
-        handleImportClick,
-        handleFileChange
-    } = useDataManagement(tests, activeTab, activeStatus, onImport);
-
     return (
-        <div className="w-full flex flex-col gap-10">
-            {/* TOP ROW: Search, Status, and Data Management */}
-            <div className="flex flex-col xl:flex-row xl:items-end gap-10">
-                <SearchSection
-                    searchQuery={searchQuery}
-                    setSearchQuery={setSearchQuery}
-                />
+        <section className="filter-bar no-scrollbar">
+            <div className="filter-bar-content">
+                <div className="category-list">
+                    <button
+                        onClick={() => setActiveTab('All')}
+                        className={`category-btn ${activeTab === 'All' ? 'category-btn-active' : ''}`}
+                    >
+                        All
+                    </button>
+                    {categories.map(category => (
+                        <button
+                            key={category}
+                            onClick={() => setActiveTab(category)}
+                            className={`category-btn ${activeTab === category ? 'category-btn-active' : ''}`}
+                        >
+                            {category}
+                        </button>
+                    ))}
+                </div>
 
-                <div className="flex flex-col sm:flex-row gap-6 xl:ml-auto">
-                    <StatusSection
-                        activeStatus={activeStatus}
-                        setActiveStatus={setActiveStatus}
-                        doneCount={doneCount}
-                        pendingCount={pendingCount}
-                    />
+                <div className="filter-controls">
+                    <div className="difficulty-select-wrapper">
+                        <span className="select-label">Difficulty</span>
+                        <select
+                            value={difficulty}
+                            onChange={(e) => setDifficulty(e.target.value)}
+                            className="difficulty-select"
+                        >
+                            <option value="All">All</option>
+                            <option value="Beginner">Beginner</option>
+                            <option value="Intermediate">Intermediate</option>
+                            <option value="Advanced">Advanced</option>
+                            <option value="Expert">Expert</option>
+                        </select>
+                    </div>
 
-                    <DataConsole
-                        handleExport={handleExport}
-                        handleImportClick={handleImportClick}
-                        handleFileChange={handleFileChange}
-                        fileInputRef={fileInputRef}
-                        onViewLogs={onViewLogs}
-                    />
-
-                    <SizeSelector
-                        cardSize={cardSize}
-                        setCardSize={setCardSize}
-                    />
+                    <div className="trending-toggle-group">
+                        <span className="trending-label">Trending</span>
+                        <button
+                            onClick={() => setIsTrending(!isTrending)}
+                            className={`toggle-switch ${isTrending ? 'toggle-on' : 'toggle-off'}`}
+                        >
+                            <div className={`toggle-knob ${isTrending ? 'knob-on' : 'knob-off'}`}></div>
+                        </button>
+                    </div>
                 </div>
             </div>
-
-            {/* BOTTOM ROW: Region Filters */}
-            <RegionSection
-                categories={categories}
-                activeTab={activeTab}
-                setActiveTab={setActiveTab}
-            />
-        </div>
+        </section>
     );
 };
 

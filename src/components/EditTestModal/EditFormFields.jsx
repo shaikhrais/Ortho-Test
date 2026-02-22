@@ -11,7 +11,7 @@ const EditFormFields = ({
     clearInputs
 }) => {
     return (
-        <div className="space-y-8">
+        <div className="form-fields-container">
             <YoutubeSection
                 youtubeUrl={youtubeUrl}
                 setYoutubeUrl={setYoutubeUrl}
@@ -20,7 +20,7 @@ const EditFormFields = ({
                 pasteFromClipboard={pasteFromClipboard}
             />
 
-            <div className="h-px bg-white/5" />
+            <div className="form-divider" />
 
             <ThumbnailSection
                 thumbnailUrl={thumbnailUrl}

@@ -23,7 +23,7 @@ const JointDashboard = ({ joints = [] }) => {
     };
 
     return (
-        <div className="min-h-screen bg-[#0b1020] text-[#e9eeff] font-sans selection:bg-primary/30">
+        <div className="dashboard-root selection-primary">
             <DashboardHeader
                 selectedJoint={selectedJoint}
                 setSelectedJoint={setSelectedJoint}
@@ -33,10 +33,10 @@ const JointDashboard = ({ joints = [] }) => {
                 handleReset={handleReset}
             />
 
-            <main className="max-w-[1400px] mx-auto px-6 py-10">
-                <div className="grid grid-cols-1 xl:grid-cols-[1.4fr_0.9fr] gap-8">
+            <main className="dashboard-main-container">
+                <div className="dashboard-grid-layout">
                     {/* LEFT COLUMN: Summary & Details */}
-                    <div className="space-y-8">
+                    <div className="dashboard-col-left">
                         <DashboardSummary
                             selectedJoint={selectedJoint}
                             groupedData={groupedData}
@@ -50,11 +50,11 @@ const JointDashboard = ({ joints = [] }) => {
                     </div>
 
                     {/* RIGHT COLUMN: KPI & Workflow */}
-                    <aside className="space-y-8">
-                        <div className="grid grid-cols-3 gap-4">
-                            <KPICard number={kpi.PRIMARY_MOVER} label="Movers" color="text-primary" />
-                            <KPICard number={kpi.PASSIVE_SUPPORT} label="Passive" color="text-secondary" />
-                            <KPICard number={kpi.NEURO} label="Neuro" color="text-[#fb7185]" />
+                    <aside className="dashboard-col-right">
+                        <div className="kpi-grid">
+                            <KPICard number={kpi.PRIMARY_MOVER} label="Movers" colorClass="text-primary-accent" />
+                            <KPICard number={kpi.PASSIVE_SUPPORT} label="Passive" colorClass="text-secondary-accent" />
+                            <KPICard number={kpi.NEURO} label="Neuro" colorClass="text-danger-accent" />
                         </div>
 
                         <WorkflowSection uniqueTests={uniqueTests} />

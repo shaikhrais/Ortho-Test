@@ -22,11 +22,35 @@ export const useClinicalTests = () => {
         searchQuery, setSearchQuery,
         activeTab, setActiveTab,
         activeStatus, setActiveStatus,
+        difficulty, setDifficulty,
+        isTrending, setIsTrending,
         filteredTests,
         doneCount, pendingCount
     } = useTestFilters(tests);
 
+    const [recentlyViewed, setRecentlyViewed] = useState(() => {
+        const saved = localStorage.getItem('ortho_recently_viewed');
+        return saved ? JSON.parse(saved) : [];
+    });
+
     const { logs, fetchLogs } = useActivityLogs();
+
+    // Fetch logs on mount
+    useState(() => {
+        fetchLogs();
+    }, []);
+
+    const handleSelectTest = (test) => {
+        setSelectedTest(test);
+        if (test) {
+            setRecentlyViewed(prev => {
+                const filtered = prev.filter(t => t.id !== test.id);
+                const updated = [test, ...filtered].slice(0, 5);
+                localStorage.setItem('ortho_recently_viewed', JSON.stringify(updated));
+                return updated;
+            });
+        }
+    };
 
     const handleSaveTest = async (updatedTest) => {
         try {
@@ -68,8 +92,13 @@ export const useClinicalTests = () => {
         setActiveTab,
         activeStatus,
         setActiveStatus,
+        difficulty,
+        setDifficulty,
+        isTrending,
+        setIsTrending,
         selectedTest,
-        setSelectedTest,
+        setSelectedTest: handleSelectTest,
+        recentlyViewed,
         editingTest,
         setEditingTest,
         syncStatus,
